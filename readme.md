@@ -34,4 +34,5 @@ port: 8080 //监听8080端口
 ```
 -config hds.config.json  //相对当前目录的路径
 -p 8981 //端口号
+-v or -version //版本号
 ```

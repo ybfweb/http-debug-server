@@ -1,7 +1,8 @@
 {
   "name": "http-debug-server",
-  "version": "0.0.2",
-  "description": "http-debug-server 本地测试调试静态文件服务器，http支持接口转发",
+  "version": "0.0.6",
+	"description": "http-debug-server 本地测试调试静态文件服务器，http支持接口转发",
+	"homepage": "https://github.com/ybfweb/http-debug-server.git",
   "main": "bin/index.js",
   "bin": {
     "http-debug-server": "bin/index.js",
@@ -22,6 +23,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@gitee.com:ybfweb/http-debug-server.git"
+    "url": "https://github.com/ybfweb/http-debug-server.git"
   }
 }

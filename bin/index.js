@@ -2,15 +2,24 @@
 const fs   = require('fs');
 const http = require('http');
 const os   = require('os');
-var colors = require('colors');
+const colors = require('colors');
+const contentType = require('./contentType.js');
+const version = require('../package.json').version;
 
 //显示帮助
 if(process.argv.indexOf('-h') > -1 || process.argv.indexOf('-help') > -1){
 	console.log(colors.bgCyan([
-		'http-debug-server ',
-		'   -p  监听端口号',
+		'http-debug-server                   ',
+		'   -v or -version 版本号             ',
+		'   -p  监听端口号                     ',
 		'   -config path   配置文件path为相对路径'
 	].join('\n')));
+  process.exit();
+}
+
+//显示版本号
+if(process.argv.indexOf('-v') > -1 || process.argv.indexOf('-version') > -1){
+	console.log(colors.bgCyan(version));
   process.exit();
 }
 
@@ -95,6 +104,12 @@ function getPathContent(path, res) {
 		}
 		if (stats.isFile()) {
 			res.statusCode = 200;
+			let ext = null;
+			let tmp = path.toLocaleLowerCase();
+			ext = tmp.replace(/^.*\./, '').toLowerCase();
+			if(!!ext && contentType[ext]){
+				res.setHeader('Content-Type', contentType[ext] + '; charset=utf8');
+			}
 			fs.createReadStream(fullPath).pipe(res);
 		} else if (stats.isDirectory()) {
 			fs.readdir(fullPath, function (err, files) {
